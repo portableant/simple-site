@@ -1,12 +1,22 @@
 <?php
-
-// Last updated 22 Dec 2020
-
-// A V&A viewer (https://github.com/vanda/curtain-viewer) based on OpenSeaDragon, using the curtain-sync plugin (https://github.com/cuberis/openseadragon-curtain-sync) for comparing naturally aligned image variants, such as those obtained by multi-spectral imaging, supplied as canvases in a IIIF manifest.
+/**
+* Curtain extension script for Joe Padfield's Simple site generator
+*
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @author Joe Padfield
+* @since 18/03/2021
+* Last updated 22 Dec 2020
+* A V&A viewer (https://github.com/vanda/curtain-viewer) based on OpenSeaDragon, using the curtain-sync plugin (https://github.com/cuberis/openseadragon-curtain-sync) for comparing naturally aligned image variants, such as those obtained by multi-spectral imaging, supplied as canvases in a IIIF manifest.
+*/
 
 $extensionList["curtain"] = "extensionCurtain";
-
-function extensioncurtain ($d, $pd) {
+/**
+ * [extensioncurtain description]
+ * @param  array  $d  [description]
+ * @param  array  $pd [description]
+ * @return [type]     [description]
+ */
+function extensioncurtain (array $d, array $pd) {
   global $extraHTML;
   $workspace = false;
   $mans = '[]';
@@ -30,5 +40,5 @@ function extensioncurtain ($d, $pd) {
   col-lg-12"><div class="curtain-viewer" data-iiif-manifest="' . $d["file"]
   . '"></div></div></div>'.$codeHTML);
 
-  return (array("d" => $d, "pd" => $pd));
+  return array("d" => $d, "pd" => $pd);
 }

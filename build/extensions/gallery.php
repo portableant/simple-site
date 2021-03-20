@@ -1,5 +1,12 @@
 <?php
-// Last updated 20 Dec 2020
+/**
+* Dygraph extension script for Joe Padfield's Simple site generator
+*
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @author Joe Padfield
+* @since 18/03/2021
+* Last updated 20 Dec 2020
+*/
 
 $extensionList["gallery"] = "extensionGallery";
 
@@ -22,50 +29,55 @@ function extensionGallery ($d, $pd)
     $last = "primary";
 
     foreach ($dets["images"] as $n => $a) {
-      $a = array_merge(array("logo" => "", "link" => "#", "level" => "primary"), $a);
+      $a = array_merge(
+        array(
+          "logo" => "", "link" => "#", "level" => "primary"
+        ),
+        $a);
 
-      if ($a["level"] != $last) {
-        $gcontent .= '</div>';
-        if (isset($dets["stitle"]))
-        {$gcontent .= "<h3>$dets[stitle]</h3>";}
-        $gcontent .= '<div class="row text-center text-lg-left">';
+        if ($a["level"] != $last) {
+          $gcontent .= '</div>';
+          if (isset($dets["stitle"])) {
+            $gcontent .= "<h3>$dets[stitle]</h3>";
+          }
+          $gcontent .= '<div class="row text-center text-lg-left">';
+        }
+
+        $last = $a["level"];
+
+        ob_start();
+        echo <<<END
+        <div class="col-lg-3 col-md-4 col-6">
+        <a href="$a[link]" class="d-block mb-4 h-100">
+        <img class="img-fluid img-thumbnail $a[level] mx-auto d-block"
+        src="$a[logo]" alt="$n">
+        </a>
+        </div>
+        END;
+        $gcontent .= ob_get_contents();
+        ob_end_clean(); // Don't send output to client
       }
 
-      $last = $a["level"];
+      $gcontent .= '</div>';
 
-      ob_start();
-      echo <<<END
-      <div class="col-lg-3 col-md-4 col-6">
-      <a href="$a[link]" class="d-block mb-4 h-100">
-      <img class="img-fluid img-thumbnail $a[level] mx-auto d-block"
-      src="$a[logo]" alt="$n">
-      </a>
-      </div>
-      END;
-      $gcontent .= ob_get_contents();
-      ob_end_clean(); // Don't send output to client
+      //use to hide the label used for the first line which is just in place to provide a margin/padding on the left.
+      $pd["extra_css"] .= "
+      img.primary, img.secondary {
+        display: block;
+        max-width:230px;
+        max-height:128px;
+        width: auto;
+        height: auto;
+        border: 0px solid black;
+      }
+
+      img.secondary{
+        max-width:192px;
+        max-height:96px;
+      }";
+
+      $d["content"] = positionExtraContent ($d["content"], $gcontent);
     }
 
-    $gcontent .= '</div>';
-
-    //use to hide the label used for the first line which is just in place to provide a margin/padding on the left.
-    $pd["extra_css"] .= "
-    img.primary, img.secondary {
-      display: block;
-      max-width:230px;
-      max-height:128px;
-      width: auto;
-      height: auto;
-      border: 0px solid black;
-    }
-
-    img.secondary{
-      max-width:192px;
-      max-height:96px;
-    }";
-
-    $d["content"] = positionExtraContent ($d["content"], $gcontent);
+    return (array("d" => $d, "pd" => $pd));
   }
-
-  return (array("d" => $d, "pd" => $pd));
-}

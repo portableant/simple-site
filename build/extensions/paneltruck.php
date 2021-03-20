@@ -45,5 +45,5 @@ function extensionPanelTruck (array $d, array $pd) {
   <panel-truck screenplay-src="'.$d["file"].'"></panel-truck>
   </div>'.$codeHTML);
 
-  return (array("d" => $d, "pd" => $pd));
+  return array("d" => $d, "pd" => $pd);
 }

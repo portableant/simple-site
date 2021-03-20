@@ -4,7 +4,7 @@
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @author Joe Padfield (Majority)
- * @author Daniel Pett (minimal)
+ * @author Daniel Pett (minimal - like 10 lines!)
  */
 // Last updated 04 Feb 2021
 

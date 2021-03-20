@@ -13,20 +13,17 @@ $extensionList["search"] = "extensionSearch";
  * @param  array $pd [description]
  * @return array     [description]
  */
-function extensionSearch( array $d, array $pd)
-{
+function extensionSearch( array $d, array $pd) {
 
   $pd["extra_js_scripts"] = array(
     "lunr" => "https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js",
-    "search" => "js/search.js"
-    //"https://unpkg.com/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js",
+    "search" => "js/search.js",
   );
 
   $pd["extra_js"] .= " ";
 
   if (isset($d["file"]) and isset($d["displaycode"])) {
     $dets = getRemoteJsonDetails($d["file"], false, true);
-    $extraHTML .= displayCode ($dets, "The Curtain JSON File", "json", $codecaption);
   }
   return array("d" => $d, "pd" => $pd);
 }

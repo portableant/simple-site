@@ -1,6 +1,6 @@
 <?php
 /**
-* Search extension script for Joe Padfield's Simple site generator
+* Mirador extension script for Joe Padfield's Simple site generator
 *
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 * @author Joe Padfield
@@ -8,7 +8,7 @@
 * Updated to Mirador V3 18/03/2021
 * Adding extra manifests in the Text example as the catalog rather than a manifest variable
 */
-//
+
 
 $extensionList["mirador"] = "extensionMirador";
 /**
@@ -95,8 +95,13 @@ function extensionMirador (array $d, array $pd)  {
   return (array("d" => $d, "pd" => $pd));
 }
 
-
-function listToManifest ($list) {
+/**
+ * Convert list to a manifest string
+ *
+ * @param  array  $list [description]
+ * @return string      HTML manifest string
+ */
+function listToManifest (array $list) {
   $manifests = "{";
 
     foreach ($list as $k => $url) {
@@ -104,5 +109,5 @@ function listToManifest ($list) {
       ".json_encode($url).":{\"provider\":\"Undefined\"},";
     }
 
-    return($manifests."}");
+    return $manifests . "}";
   }
