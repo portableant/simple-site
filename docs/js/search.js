@@ -24,8 +24,6 @@ async function main() {
       }, this)
     });
 
-    let strippedString = originalString.replace(/(<([^>]+)>)/gi, "");
-
     let searchParams = new URLSearchParams(window.location.search)
     let param = searchParams.get('query')
     var results = idx.search(param);
