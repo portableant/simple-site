@@ -110,8 +110,9 @@
 		"displaycode": true
 	},
 	"Search": {
-		"title": "Search",
-		"content": "<h3>Search results<\/h3><div id=\"search_results\" class=\"row\"></div>",
+		"title": "Search Results",
+		"class": "search",
+		"content": "<div id=\"search_results\" class=\"row\"></div>",
 		"content right": ""
 		}
 }

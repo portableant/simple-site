@@ -17,8 +17,7 @@ $default_scripts = array(
 		"jquery" => "https://unpkg.com/jquery@3.6.0/dist/jquery.min.js",
 		"tether" => "https://unpkg.com/tether@1.4.7/dist/js/tether.min.js",
 		"bootstrap" => "https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js",
-		"lunr" => "https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js",
-		"search" => "js/search.js"),
+		),
 	"css-scripts" => array(
 			"fontawesome" => "https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css",
 			"bootstrap" => "https://unpkg.com/bootstrap@4.6.0/dist/css/bootstrap.min.css",
@@ -382,6 +381,7 @@ function buildTopNav ($name, $bcs=false) {
 
 	$no = 1;
 
+
 	foreach ($pnames as $pname) {
 		if ($pname == "home") {
 			$puse= "index";
@@ -395,7 +395,7 @@ function buildTopNav ($name, $bcs=false) {
 		} else {
 			$a = array("", "");
 		}
-		unset($menuList['Search']);
+
 		if (isset($menuList[$pname])) {
 			$html .= '<!-- Dropdown Loop ' . $no . ' --><li class="nav-item dropdown ';
 			$html .= $a[0] . '"><a id="dropdownMenu' . $no;
@@ -419,15 +419,18 @@ function buildTopNav ($name, $bcs=false) {
 			}
 			$html .= '</ul></li><!-- End Loop ' . $no . ' -->';
 		} else {
+			if($pname != 'Search'){
 			$html .= '<li class="nav-item ' . $a[0] . '"><a class="nav-link" href="';
 			$html .= $puse . '.html">' . ucfirst($pname) . $a[1] . '</a></li>';
 		}
+		}
 	}
-	$html .= '<form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" id="search" type="search" name="query" placeholder="Search" aria-label="Search" action="/search" method="GET">
-          <button class="btn btn-outline-light my-2 my-sm-0" type="submit" formaction="search.html">Search</button>
-        </form>';
-	$html .= "</ul></div>";
+	$html .= '<form class="form-inline my-2 my-lg-0">';
+  $html .= '<input class="form-control mr-sm-2" id="search" type="search" name="query"';
+	$html .= ' placeholder="Search" aria-label="Search" action="/search" method="GET">';
+  $html .= '<button class="btn btn-outline-light my-2 my-sm-0" type="submit"';
+  $html .= ' formaction="search.html">Search</button></form>';
+	$html .= '</ul></div>';
 
 	return($html);
 }
@@ -664,6 +667,7 @@ foreach ($pageDetails["js_scripts"] as $k => $path) {
 	$jsScripts .="
 <script src=\"$path\"></script>";
 }
+
 
 if ($pageDetails["licence"]){
 	$tofu = '<div class="licence">'.$pageDetails["licence"].'</div>';

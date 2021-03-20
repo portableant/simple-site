@@ -1,6 +1,11 @@
 <?php
-
-// Last update 19 Feb 2021
+/**
+* List extension script for Joe Padfield's Simple site generator
+*
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @author Joe Padfield
+* @since 19/02/2021
+*/
 
 $extensionList["list"] = "extensionCards";
 $blank = array("groups" => array(), "ptitle" => "",
@@ -33,27 +38,29 @@ function extensionCards ($d, $pd)
 global $blank, $defaultcard, $displaychecked, $maxcols;
 $gcontent = "";
 
-if (isset($d["file"]) and file_exists($d["file"]))
-{
+if (isset($d["file"]) and file_exists($d["file"])) {
 $dets = getRemoteJsonDetails($d["file"], false, true);
 
-if (isset($dets["defaultcard"]))
-{$defaultcard = $dets["defaultcard"];}
+if (isset($dets["defaultcard"])) {
+  $defaultcard = $dets["defaultcard"];
+}
 
-if (isset($dets["displaychecked"]))
-{$displaychecked = $dets["displaychecked"];}
+if (isset($dets["displaychecked"])) {
+  $displaychecked = $dets["displaychecked"];
+}
 
 if (!isset($dets["list"]))
 {$dets["list"] = array();}
 
 // If a path to json files is provided they need to be loaded into an array
-if (!is_array($dets["list"] ))
-{
+if (!is_array($dets["list"] )) {
 $lfs = glob($dets["list"]);
 $dets["list"] = array();
 foreach($lfs as $file){
 $ja = getRemoteJsonDetails($file, false, true);
-if ($ja) {$dets["list"][] = $ja;}}
+if ($ja) {$dets["list"][] = $ja;
+}
+}
 }
 
 
@@ -108,13 +115,15 @@ unset($dets["groups"][$gnm]);
 }
 }
 
-foreach ($dets["groups"] as $gnm => $ga)
-{
-if (!isset($ga["html"])) {/*ERROR*/}
-if (in_array($dets["groups"][$gnm]["card"], array("list")))
-{$gcontent .= $ga ["html"]."</ul><br/>";}
-else
-{$gcontent .= $ga ["html"]."</div><br/>";}
+foreach ($dets["groups"] as $gnm => $ga) {
+if (!isset($ga["html"])) {
+/*ERROR*/
+}
+if (in_array($dets["groups"][$gnm]["card"], array("list"))) {
+  $gcontent .= $ga ["html"]."</ul><br/>";
+} else {
+  $gcontent .= $ga ["html"]."</div><br/>";
+}
 }
 
 $pd["extra_css"] .= "
@@ -155,10 +164,13 @@ top: -75px;
 ";
 
 // Check if a table of contents should be added.
-if (!isset($dets["tableofcontents"])) {$dets["tableofcontents"] = false;}
-if ($dets["tableofcontents"])
-{$tb = buildContents ($dets["groups"]);}
-else
+if (!isset($dets["tableofcontents"])) {
+  $dets["tableofcontents"] = false;
+}
+if ($dets["tableofcontents"]) {
+  $tb = buildContents ($dets["groups"]);
+
+} else
 {$tb = "";}
 
 $d["content"] = positionExtraContent ($d["content"], $tb.$gcontent);
