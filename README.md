@@ -54,6 +54,15 @@ GitHub does not present project web-pages, GitHub Pages, by default, but it is v
 * There will be a slight pause and the screen should be updated, with an indication of what your new web-page address will be.
 * Your GitHub Pages should now be up and running.
 
+# Enabling custom domain name
+In the docs folder is a file called simply CNAME. In this type just one line of text with your domain name with no protocol or trailing slash and save it eg:
+```bash
+github.com
+```
+* on the **Settings** tab, which should be towards the upper right corner of the page.
+* Scroll down until you reach the **GitHub Pages** section.
+* In the custom domain section, check that this matches your entry in CNAME and check the **Enforce HTTPS** box.
+
 # Dependencies
 
 Once built, simple html pages should run without any additional software, all of the basic required [js](https://en.wikipedia.org/wiki/JavaScript) and [css](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) files are already included, or externally referenced but more information about the main ones can be found at:

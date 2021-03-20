@@ -1,15 +1,28 @@
 <?php
+/**
+* Dygraph extension script for Joe Padfield's Simple site generator
+*
+* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @author Joe Padfield
+* @since 18/03/2021
+* Last updated 22 Dec 2020
+*/
 
-// Last updated 22 Dec 2020
 
 $extensionList["dygraph"] = "extensionDygraph";
-
-function extensionDygraph ($d, $pd)
+/**
+ * [extensionDygraph description]
+ * @param  array  $d  [description]
+ * @param  array  $pd [description]
+ * @return [type]     [description]
+ */
+function extensionDygraph (array $d, array $pd)
 {
-  if (isset($d["file"]) and file_exists($d["file"]))
-  {$dets = getRemoteJsonDetails($d["file"], false, true);}
-  else
-  {$dets = array();}
+  if (isset($d["file"]) and file_exists($d["file"])) {
+    $dets = getRemoteJsonDetails($d["file"], false, true);
+  } else {
+    $dets = array();
+  }
 
   $pd["extra_js_scripts"] = array(
     "https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.1.0/dygraph.min.js",
@@ -51,14 +64,10 @@ function extensionDygraph ($d, $pd)
   if (isset($d["file"]) and file_exists($d["file"])) {
     ob_start();
     echo <<<END
-
     END;
     $mcontent = ob_get_contents();
     ob_end_clean(); // Don't send output to client
-
     $d["content"] = positionExtraContent ($d["content"], $mcontent);
-
   }
-
-  return (array("d" => $d, "pd" => $pd));
+  return array("d" => $d, "pd" => $pd);
 }

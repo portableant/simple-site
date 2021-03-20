@@ -32,12 +32,12 @@
 <style>
 
 g a {
-	color:inherit;}
+color:inherit;}
 
 #int0-text {
-	display:none;}
+  display:none;}
 
-#tooltip {
+  #tooltip {
   background: cornsilk;
   border: 1px solid black;
   border-radius: 5px;
@@ -45,7 +45,7 @@ g a {
   font-size: 0.75em;
   font-weight: bold;}
 
-
+  
 </style>
 <!-- Global site tag (gtag.js) - Google Analytics - Only added in if the 'GoogleAnalyticsID' i set in the site.json file-->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQV11QKCED"></script>
@@ -87,11 +87,11 @@ style="" alt="GitHub Jpadfield Simple-site"/>
 </nav></div><!--/span--></div><!--/row--><div class="row"><div class=\"$col[class]\"><p>This extension uses the <a href='https://mermaid-js.github.io/mermaid/#/'>Mermaid</a> library to produce a customised timeline gantt chart. It is an example of a special page that can be added to the <a href='pages.json.html'>pages.json</a> file.</p>
 
 <h3>The Example</h3>
-	<div id="gantt" class="mermaid">
+<div id="gantt" class="mermaid">
 gantt
-       dateFormat  YYYY-MM-DD
-       title Simple Site Time Line Example
-       	section Initial discussion and planning
+dateFormat  YYYY-MM-DD
+title Simple Site Time Line Example
+	section Initial discussion and planning
 		Add as a margin :int0, 2019-11-01, 2019-11-01
 		Literature/website/software review :int1, 2020-04-01, 2020-10-01
 		Establish communications, collaborative environments and links with related interest groups :int2, 2020-02-01, 2020-06-01
@@ -118,7 +118,7 @@ gantt
 	section Reporting
 		Complete and Deliver Final Rreport :crit, active, rp0, 2021-10-01, 2021-11-01
 
-	</div>
+</div>
 
 <h3>Summary</h3>
 <div class="alert alert-info" role="alert"><h4 class="alert-heading">Extension Variables</h4><p>For this extension to work the <b>class</b> variable needs to be set to <b>timeline</b> and the <b>file</b> variable needs to give the name of the additional json file including the timeline data as shown below.</p></div>
@@ -239,8 +239,7 @@ gantt
 <script src="https://unpkg.com/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/mermaid@8.7.0/dist/mermaid.min.js"></script>
 <script>
-
-var rectIDs = [];
+     var rectIDs = [];
 rectIDs["int0"] = "2019-11-01 - 2019-11-01";
 rectIDs["int1"] = "2020-04-01 - 2020-10-01";
 rectIDs["int2"] = "2020-02-01 - 2020-06-01";
@@ -267,30 +266,30 @@ var ttdiv = false;
 
 function showTooltip(evt, cid) {
 
-	if (!ttdiv)
-		{let div = document.createElement('div');
-		 div.id = "tooltip";
-		 div.display = "none";
-		 div.style = "position: absolute; display: none;";
-		 document.body.append(div);
-		 ttdiv = true;}
+if (!ttdiv)
+{let div = document.createElement('div');
+div.id = "tooltip";
+div.display = "none";
+div.style = "position: absolute; display: none;";
+document.body.append(div);
+ttdiv = true;}
 
-	var daterange = "Date Range";
-	if (cid in rectIDs)
-		{daterange = rectIDs[cid];}
+var daterange = "Date Range";
+if (cid in rectIDs)
+{daterange = rectIDs[cid];}
 
 
-  let tooltip = document.getElementById("tooltip");
-  tooltip.innerHTML = daterange;
-  tooltip.style.display = "block";
-  tooltip.style.left = evt.pageX + 10 + 'px';
-  tooltip.style.top = evt.pageY + 10 + 'px';
-	}
+let tooltip = document.getElementById("tooltip");
+tooltip.innerHTML = daterange;
+tooltip.style.display = "block";
+tooltip.style.left = evt.pageX + 10 + 'px';
+tooltip.style.top = evt.pageY + 10 + 'px';
+}
 
 function hideTooltip() {
-  var tooltip = document.getElementById("tooltip");
-  tooltip.style.display = "none";
-	}
+var tooltip = document.getElementById("tooltip");
+tooltip.style.display = "none";
+}
 
 // Select the node that will be observed for mutations
 const targetNode = document.getElementById('gantt');
@@ -300,24 +299,24 @@ const config = { attributes: true, childList: true, subtree: true };
 
 // Callback function to execute when mutations are observed
 const callback = function(mutationsList, observer) {
-	// Use traditional 'for loops' for IE 11
-  for(let mutation of mutationsList) {
-		if (mutation.type === 'attributes' &&
-				mutation.attributeName == 'id' &&
-				mutation.target.tagName == 'rect') {
+// Use traditional 'for loops' for IE 11
+for(let mutation of mutationsList) {
+if (mutation.type === 'attributes' &&
+mutation.attributeName == 'id' &&
+mutation.target.tagName == 'rect') {
 
-			$( "#"+mutation.target.id ).mousemove(function( event ) {
-				showTooltip(event, mutation.target.id);});
-			$( "#"+mutation.target.id ).mouseout(function( event ) {
-				hideTooltip();});
+$( "#"+mutation.target.id ).mousemove(function( event ) {
+showTooltip(event, mutation.target.id);});
+$( "#"+mutation.target.id ).mouseout(function( event ) {
+hideTooltip();});
 
-			$( "#"+mutation.target.id+"-text" ).mousemove(function( event ) {
-				showTooltip(event, mutation.target.id);});
-			$( "#"+mutation.target.id+"-text" ).mouseout(function( event ) {
-				hideTooltip();});
-			}
-    }
-	};
+$( "#"+mutation.target.id+"-text" ).mousemove(function( event ) {
+showTooltip(event, mutation.target.id);});
+$( "#"+mutation.target.id+"-text" ).mouseout(function( event ) {
+hideTooltip();});
+}
+}
+};
 
 // Create an observer instance linked to the callback function
 const observer = new MutationObserver(callback);
@@ -327,17 +326,17 @@ observer.observe(targetNode, config);
 
 function onLoad() {
 	
-			mermaid.ganttConfig = {
-		    titleTopMargin:25,
-		    barHeight:20,
-		    barGap:4,
-		    topPadding:50,
-		    sidePadding:50
-				}
-		  //console.log(mermaid.render);
-		  mermaid.initialize({startOnLoad:true, flowchart: {
-		    curve: 'basis'
-		  }});$(function() {
+  mermaid.ganttConfig = {
+  titleTopMargin:25,
+  barHeight:20,
+  barGap:4,
+  topPadding:50,
+  sidePadding:50
+  }
+  //console.log(mermaid.render);
+  mermaid.initialize({startOnLoad:true, flowchart: {
+  curve: 'basis'
+  }});$(function() {
 // ------------------------------------------------------- //
 // Multi Level dropdowns
 // ------------------------------------------------------ //
