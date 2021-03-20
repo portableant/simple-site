@@ -1,6 +1,11 @@
 <?php
-
-// Created 05/01/2021
+/**
+ * Panel truck extension for Joe Padfield's Simple site generator
+ *
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @author Joe Padfield (Majority)
+ * @since 05/01/2021
+ */
 
 $extensionList["paneltruck"] = "extensionPanelTruck";
 /**
